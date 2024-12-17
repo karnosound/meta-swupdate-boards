@@ -1,0 +1,33 @@
+software = {
+        version = @@DISTRO_VERSION@@;
+        hardware-compatability: ["1.0"];
+
+        stable : {
+                copy1: {
+                        images: ({
+                                filename = "myir-image-core.ext4.gz"
+                                type = "raw";
+                                sha256 = "$swupdate_get_sha256(myir-image-core.ext4.gz)";
+                                device = "/dev/mmcblk2p4";
+                                compressed = true;
+                        });
+                        scripts: ({
+                                filename = "emmcsetup.lua"
+                                type = "lua";
+                        })
+                };
+                copy2: {
+                        images: ({
+                                filename = "myir-image-core.ext4";
+                                type = "raw";
+                                sha256 = "$swupdate_get_sha256(myir-image-core.ext4.gz)";
+                                device = "/dev/mmcblk2p5";
+                                compressed = true;
+                        });
+                        scripts: ({
+                                filename = "emmcsetup.lua";
+                                type = "lua";
+                        });
+                };
+        }
+}
