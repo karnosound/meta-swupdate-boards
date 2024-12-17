@@ -1,32 +1,31 @@
 software = {
-        version = @@DISTRO_VERSION@@;
+        version = "1.0.0";
+        description = "Firmware update for myir-stm32mp1"
         hardware-compatability: ["1.0"];
 
         stable : {
                 copy1: {
                         images: ({
-                                filename = "myir-image-core.ext4.gz"
+                                filename = "myir-image-core.rootfs.ext4"
                                 type = "raw";
-                                sha256 = "$swupdate_get_sha256(myir-image-core.ext4.gz)";
+                                sha256 = "$swupdate_get_sha256(myir-image-core.rootfs.ext4)";
                                 device = "/dev/mmcblk2p4";
-                                compressed = true;
+                                compressed = false;
                         });
                         scripts: ({
                                 filename = "emmcsetup.lua"
-                                type = "lua";
                         })
                 };
                 copy2: {
                         images: ({
-                                filename = "myir-image-core.ext4";
+                                filename = "myir-image-core.rootfs.ext4";
                                 type = "raw";
-                                sha256 = "$swupdate_get_sha256(myir-image-core.ext4.gz)";
+                                sha256 = "$swupdate_get_sha256(myir-image-core.rootfs.ext4)";
                                 device = "/dev/mmcblk2p5";
-                                compressed = true;
+                                compressed = false;
                         });
                         scripts: ({
                                 filename = "emmcsetup.lua";
-                                type = "lua";
                         });
                 };
         }
