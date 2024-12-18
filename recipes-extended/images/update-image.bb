@@ -11,10 +11,10 @@ SRC_URI += "\
 "
 
 # images to build before building swupdate image
-IMAGE_DEPENDS = "myir-image-core"
+IMAGE_DEPENDS = "myir-image-core virtual/kernel"
 
 # images and files that will be included in the .swu image
-SWUPDATE_IMAGES = "myir-image-core"
+SWUPDATE_IMAGES = "myir-image-core uImage"
 
-SWUPDATE_IMAGES_FSTYPES[myir-image-core] = "tar.xz ext4"
+SWUPDATE_IMAGES_FSTYPES[myir-image-core] = ".ext4"
 SWUPDATE_IMAGES_NOAPPEND_MACHINE[myir-image-core] = "1"

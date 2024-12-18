@@ -12,65 +12,44 @@ software = {
                                 	sha256 = "$swupdate_get_sha256(myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
                                 	device = "/dev/mmcblk2p4";
                                 	compressed = false;
+                                	installed-directly = true;
                         		},
                         		{
-                        			filename = "st-image-userfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
+                        			filename = "uImage";
                         			type = "raw";
-                        			sha256 = "$swupdate_get_sha256(st-image-userfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                        			device = "/dev/mmcblk2p5";
-                        			compressed = false;                        			
-                        		},
-                        		{
-                        			filename = "st-image-vendorfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                        			type = "raw";
-                        			sha256 = "$swupdate_get_sha256(st-image-vendorfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                        			device = "/dev/mmcblk2p6";
+                        			sha256 = "$swupdate_get_sha256(uImage)";
+                        			device = "/dev/mmcblk2p2";
                         			compressed = false;
+                        			installed-directly = true;
                         		},
-                        		{
-                        			filename = "st-image-bootfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                        			type = "raw";
-                        			sha256 = $swupdate_get_sha256(st-image-bootfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4);
-                        			device = "/dev/mmcblk2p1";
-                        			compressed = false;
-                        		},
+                        	
                         );
                         scripts: ({
-                                filename = "emmcsetup.lua"
+                                filename = "emmcsetup.lua";
+                                type = "lua";
                         })
                 };
                 copy2: {
                         images: (
                                 {
-                                  filename = "myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                  type = "raw";
-                                  sha256 = "$swupdate_get_sha256(myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                                  device = "/dev/mmcblk2p4";
-                                  compressed = false;
+                                  	filename = "myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
+                                  	type = "raw";
+                                  	sha256 = "$swupdate_get_sha256(myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
+                                  	device = "/dev/mmcblk2p3";
+                                  	compressed = false;
+                                  	installed-directly = true;
                                 },
                                 {
-                                  filename = "st-image-userfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                  type = "raw";
-                                  sha256 = "$swupdate_get_sha256(st-image-userfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                                  device = "/dev/mmcblk2p5";
-                                  compressed = false;
-                                },
-                                {
-                                  filename = "st-image-vendorfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                  type = "raw";
-                                  sha256 = "$swupdate_get_sha256(st-image-vendorfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                                  device = "/dev/mmcblk2p6";
-                                  compressed = false;
-                                },
-                                {
-                                  filename = "st-image-bootfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                  type = "raw";
-                                  sha256 = $swupdate_get_sha256(st-image-bootfs-@@DISTRO_VERSION@@-@@MACHINE@@.ext4);
-                                  device = "/dev/mmcblk2p1"
-                                  compressed = false;
-                                },
+                                	filename = "uImage";
+                                	type = "raw";
+                                	sha256 = "$swupdate_get_sha256(uImage)";
+                                	device = "/dev/mmcblk2p5";
+                                	compressed = false;
+                                	installed-directly = true;
+                                }
                         scripts: ({
                                 filename = "emmcsetup.lua";
+                                type = "lua";
                         });
                 };
         }
