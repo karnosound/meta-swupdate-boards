@@ -63,7 +63,7 @@ function preinst()
         end
 
         start=start+size
-        partitions = eMMC .. "p5 : start=    " .. string.format("%d", start) .. ", size=  " .. size .. ", type=83\n"
+        partitions = eMMC .. "p4 : start=    " .. string.format("%d", start) .. ", size=  " .. size .. ", type=83\n"
 
         fo:write(partitions)
         fo:close()

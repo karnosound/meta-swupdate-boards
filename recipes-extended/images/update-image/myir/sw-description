@@ -1,56 +1,63 @@
 software = {
-        version = "1.0.0";
-        description = "Firmware update for myir-stm32mp1"
-        hardware-compatability: ["1.0"];
+    version = "0.1.0";
 
-        stable : {
-                copy1: {
-                        images: (
-                        		{
-                                	filename = "myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                	type = "raw";
-                                	sha256 = "$swupdate_get_sha256(myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                                	device = "/dev/mmcblk2p4";
-                                	compressed = false;
-                                	installed-directly = true;
-                        		},
-                        		{
-                        			filename = "uImage";
-                        			type = "raw";
-                        			sha256 = "$swupdate_get_sha256(uImage)";
-                        			device = "/dev/mmcblk2p2";
-                        			compressed = false;
-                        			installed-directly = true;
-                        		},
-                        	
-                        );
-                        scripts: ({
-                                filename = "emmcsetup.lua";
-                                type = "lua";
-                        })
-                };
-                copy2: {
-                        images: (
-                                {
-                                  	filename = "myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4";
-                                  	type = "raw";
-                                  	sha256 = "$swupdate_get_sha256(myir-image-core-@@DISTRO_VERSION@@-@@MACHINE@@.ext4)";
-                                  	device = "/dev/mmcblk2p3";
-                                  	compressed = false;
-                                  	installed-directly = true;
-                                },
-                                {
-                                	filename = "uImage";
-                                	type = "raw";
-                                	sha256 = "$swupdate_get_sha256(uImage)";
-                                	device = "/dev/mmcblk2p5";
-                                	compressed = false;
-                                	installed-directly = true;
-                                }
-                        scripts: ({
-                                filename = "emmcsetup.lua";
-                                type = "lua";
-                        });
-                };
-        }
-}
+    myir = {
+        hardware-compatibility: ["1.0"];
+        stable: {
+            copy1: {
+                images: (
+                    {
+                        filename = "myir-image-core-openstlinux-eglfs-myir.ext4.gz";
+                        sha256 = "$swupdate_get_sha256(myir-image-core-openstlinux-eglfs-myir.ext4.gz)";
+                        device = "/dev/mmcblk2p4";
+                        type = "raw";
+                        compressed = "zlib";
+                    }
+                );
+                scripts: (
+                    {
+                        filename = "emmcsetup.lua";
+                        type = "lua";
+                    }
+                );
+                uboot: (
+                    {
+                        name = "boot_targets";
+                        value = "legacy_mmc1 mmc1 nand0 pxe dhcp";
+                    },
+                    {
+                        name = "bootcmd_legacy_mmc1";
+                        value = "setenv mmcdev 1;setenv bootpart 2:4; run mmcboot";
+                    }
+                );
+            };
+            copy2: {
+                images: (
+                    {
+                        filename = "myir-image-core-openstlinux-eglfs-myir.ext4.gz";
+                        sha256 = "$swupdate_get_sha256(myir-image-core-openstlinux-eglfs-myir.ext4.gz)";
+                        device = "/dev/mmcblk2p5";
+                        type = "raw";
+                        compressed = "zlib";
+                    }
+                );
+                scripts: (
+                    {
+                        filename = "emmcsetup.lua";
+                        type = "lua";
+                    }
+                );
+                uboot: (
+                    {
+                        name = "boot_targets";
+                        value = "legacy_mmc1 mmc1 nand0 pxe dhcp";
+                    },
+                    {
+                        name = "bootcmd_legacy_mmc1";
+                        value = "setenv mmcdev 1;setenv bootpart 2:5; run mmcboot";
+                    }
+                );
+            };
+        };
+    };
+};
